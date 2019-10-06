@@ -2,10 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : Scrollable
+public class Platform : MonoBehaviour
 {
-    public override void ApplyDownwardScrolling(float amount)
+    void Update()
     {
-        transform.position += Vector3.down * amount;
+        DestroyBeyondScreenBottom();       
+    }
+
+    private void DestroyBeyondScreenBottom()
+    {
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(this.transform.position);
+        if (screenPosition.y < -32) // TODO : Hardcoded
+        {
+            // TODO: Beyond the scope of this exercise, but an Object Pool pattern shall be put to good use here.
+            Destroy(gameObject);
+        }
     }
 }

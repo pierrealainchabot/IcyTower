@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	public float walkingSpeed = 10f;
 	public float jumpForce = 6f;
 	public GameObject feetLocation;
+	public float isOnGroundCheckRadius = 0.05f;
 
 	private Animator _animator;
 	private Rigidbody2D _rigidbody2D;
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
 	private float _direction = 1;
 	private float _horizontalVelocity = 0;
 	private bool _isJumping = false;
-	
+
 	void Awake () 
 	{
 		this._animator = GetComponent<Animator>();
@@ -27,8 +28,10 @@ public class PlayerController : MonoBehaviour
 	{
 		UpdateMovementStatesFromInput();
 		ApplyVelocity();
-		UpdateCharacterAnimation();
 		HandleJump();
+		UpdatePlatformParenting(GetPlatformPlayerStadingOn());
+		UpdateCharacterAnimation();
+		
 	}
 
 	private void UpdateMovementStatesFromInput()
@@ -60,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
 	private void HandleJump()
 	{
+		
 		if (IsOnTheGround())
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
@@ -74,18 +78,27 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private bool IsOnTheGround()
+	private GameObject GetPlatformPlayerStadingOn()
 	{
 		int platformLayerMask = LayerMask.GetMask("Platforms");
-		Collider2D collision = Physics2D.OverlapCircle(feetLocation.transform.position, 0.02f, platformLayerMask);
+		Collider2D collision = Physics2D.OverlapCircle(feetLocation.transform.position, isOnGroundCheckRadius, platformLayerMask);
+		return collision != null ? collision.gameObject : null;
+	}
 
-		return collision != null;
+	private void UpdatePlatformParenting(GameObject platformPlayerStandingOn)
+	{
+		this.transform.parent = platformPlayerStandingOn != null ? platformPlayerStandingOn.transform : null;
+	}
+
+	private bool IsOnTheGround()
+	{
+		return this.transform.parent != null;
 	}
 
 	private void OnDrawGizmos()
 	{
 		UnityEditor.Handles.color = Color.red;
-		UnityEditor.Handles.DrawWireDisc(feetLocation.transform.position, Vector3.back, 0.02f);
+		UnityEditor.Handles.DrawWireDisc(feetLocation.transform.position, Vector3.back, isOnGroundCheckRadius);
 	}
 
 	private void UpdateCharacterAnimation()
