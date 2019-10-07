@@ -13,6 +13,11 @@ public class LevelController : MonoBehaviour
     
     private float _elapsedDistance;
 
+    private void Start()
+    {
+        SpawnMissingPlatforms();
+    }
+
     private void Update()
     {
         SpawnMissingPlatforms();
