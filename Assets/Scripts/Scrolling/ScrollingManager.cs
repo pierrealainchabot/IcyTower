@@ -8,7 +8,7 @@ public class ScrollingManager : MonoBehaviour
 {
     public static ScrollingManager Instance { get; private set; }
 
-    public int autoScrollingSpeed = 1;
+    public float autoScrollingSpeed = 1;
     
     private List<IScrollable> _scrollables = new List<IScrollable>();
 
