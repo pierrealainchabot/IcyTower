@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 	public float jumpForce = 6f;
 	public GameObject feetLocation;
 	public float isOnGroundCheckRadius = 0.05f;
+	public float longJumpMaxTimeSec = 1f;
 
 	private Animator _animator;
 	private Rigidbody2D _rigidbody2D;
@@ -17,6 +18,9 @@ public class PlayerController : MonoBehaviour
 	private float _direction = 1;
 	private float _horizontalVelocity = 0;
 	private bool _isJumping = false;
+	private float _elapsedLongJumpTime = 0;
+	private bool _holdingJumpButton = false;
+	private bool _longJumpingAllowed = false;
 
 	void Awake () 
 	{
@@ -64,17 +68,43 @@ public class PlayerController : MonoBehaviour
 	private void HandleJump()
 	{
 		
-		if (IsOnTheGround())
+		if (IsOnTheGround() && !_holdingJumpButton)
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{	
-				_rigidbody2D.velocity = new Vector2(this._rigidbody2D.velocity.x, jumpForce);
+				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
 				_isJumping = true;
+				_holdingJumpButton = true;
+				_longJumpingAllowed = true;
+				Debug.Log("Long jumps allowed");
 			}
 			else
 			{
 				_isJumping = false;
+				_longJumpingAllowed = false;
+				_elapsedLongJumpTime = 0;
+				Debug.Log("Long jumps disallowed. Jump reset");
 			}
+		}
+		else if (_longJumpingAllowed && _holdingJumpButton)
+		{
+			_elapsedLongJumpTime += Time.deltaTime;
+			if (_elapsedLongJumpTime < longJumpMaxTimeSec)
+			{
+				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
+			}
+			else
+			{
+				_longJumpingAllowed = false;
+				Debug.Log("Long jumps disallowed. Time out");
+			}
+		}
+
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			_longJumpingAllowed = false;
+			_holdingJumpButton = false;
+			Debug.Log("Long jumps disallowed. Space released.");
 		}
 	}
 

@@ -215,11 +215,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform2
       objectReference: {fileID: 0}
-    - target: {fileID: 1116807106535995520, guid: 24694eea4d546415db88a5ce1323407e,
-        type: 3}
-      propertyPath: fallingSpeed
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7488507338282384199, guid: 24694eea4d546415db88a5ce1323407e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -280,6 +275,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1116807106535995520, guid: 24694eea4d546415db88a5ce1323407e,
+        type: 3}
+      propertyPath: fallingSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24694eea4d546415db88a5ce1323407e, type: 3}
 --- !u!1001 &1090487835
@@ -293,11 +293,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1116807106535995520, guid: 24694eea4d546415db88a5ce1323407e,
-        type: 3}
-      propertyPath: fallingSpeed
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7488507338282384199, guid: 24694eea4d546415db88a5ce1323407e,
         type: 3}
@@ -359,6 +354,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1116807106535995520, guid: 24694eea4d546415db88a5ce1323407e,
+        type: 3}
+      propertyPath: fallingSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24694eea4d546415db88a5ce1323407e, type: 3}
 --- !u!1001 &1679100125
@@ -372,11 +372,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1116807106535995520, guid: 24694eea4d546415db88a5ce1323407e,
-        type: 3}
-      propertyPath: fallingSpeed
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7488507338282384199, guid: 24694eea4d546415db88a5ce1323407e,
         type: 3}
@@ -437,6 +432,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1116807106535995520, guid: 24694eea4d546415db88a5ce1323407e,
+        type: 3}
+      propertyPath: fallingSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24694eea4d546415db88a5ce1323407e, type: 3}
@@ -506,6 +506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6603590813137662163, guid: 23825fff0ca134d3fb7a7c1e993d320f,
+        type: 3}
+      propertyPath: automaticStart
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23825fff0ca134d3fb7a7c1e993d320f, type: 3}

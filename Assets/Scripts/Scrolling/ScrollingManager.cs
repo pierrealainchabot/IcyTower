@@ -9,12 +9,15 @@ public class ScrollingManager : MonoBehaviour
     public static ScrollingManager Instance { get; private set; }
 
     public float autoScrollingSpeed = 1;
+    public bool automaticStart = false;
     
     private List<IScrollable> _scrollables = new List<IScrollable>();
+    private bool _started = false;
 
     void Awake()
     {
         SingletonPattern();
+        _started = automaticStart;
     }
 
     private void SingletonPattern()
@@ -30,9 +33,17 @@ public class ScrollingManager : MonoBehaviour
         }
     }
 
+    public void StartScrolling()
+    {
+        _started = true;
+    }
+
     void Update()
     {
-        DownwardAutoScrolling();
+        if (_started)
+        {
+            DownwardAutoScrolling();    
+        }
     }
 
     public void RegisterScrollable(IScrollable scrollable)

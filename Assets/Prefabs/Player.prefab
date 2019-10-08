@@ -100,7 +100,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1.6
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -122,6 +122,7 @@ MonoBehaviour:
   jumpForce: 10
   feetLocation: {fileID: 267151780705530986}
   isOnGroundCheckRadius: 0.05
+  longJumpMaxTimeSec: 1
 --- !u!61 &527135937251770854
 BoxCollider2D:
   m_ObjectHideFlags: 0

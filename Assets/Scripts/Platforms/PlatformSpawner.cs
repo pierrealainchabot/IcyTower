@@ -8,9 +8,12 @@ public class PlatformSpawner : MonoBehaviour
 {
     public int spawningAreaWidth;
     public Platform platformPrefab;
+    public SpawingProfile spawingProfile;
 
     private float _leftLimit;
     private float _rightLimit;
+
+    private int _platformCount;
 
     private void Awake()
     {
@@ -37,12 +40,29 @@ public class PlatformSpawner : MonoBehaviour
     {
         var newPlatform = Instantiate(platformPrefab);
         newPlatform.transform.position = new Vector3(GetRandomPositionX(), transform.position.y, 0);
-
+        newPlatform.transform.localScale = new Vector3(pickPlatformWidth(), newPlatform.transform.localScale.y, 0);
+        _platformCount++;
+        
         return newPlatform;
     }
-    
+
+    private float pickPlatformWidth()
+    {
+        if ((_platformCount % spawingProfile.fullWidthFloorAfter) == 0)
+        {
+            return spawningAreaWidth;
+        }
+
+        return Random.Range(spawingProfile.minWidth, spawingProfile.maxWidth);
+    }
+
     private float GetRandomPositionX()
     {
+        if ((_platformCount % spawingProfile.fullWidthFloorAfter) == 0)
+        {
+            return 0;
+        }
+        
         var halfPlatformWidth = 10;// TODO : Hardcoded
         var realLeftLimit = _leftLimit + halfPlatformWidth;
         var realRightLimit = _rightLimit - halfPlatformWidth;
