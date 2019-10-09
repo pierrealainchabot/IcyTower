@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 	private float _direction = 1;
 	private float _horizontalVelocity = 0;
 	private bool _isJumping = false;
+	private bool _isFalling = false;
 	private float _elapsedLongJumpTime = 0;
 	private bool _holdingJumpButton = false;
 	private bool _longJumpingAllowed = false;
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
 		
 		if (IsOnTheGround() && !_holdingJumpButton)
 		{
+			_isFalling = false;
 			if (Input.GetKeyDown(KeyCode.Space))
 			{	
 				_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
@@ -120,6 +122,10 @@ public class PlayerController : MonoBehaviour
 			{
 				_longJumpingAllowed = false;
 			}
+		}
+		else if (!_isJumping)
+		{
+			_isFalling = true;
 		}
 
 		if (Input.GetKeyUp(KeyCode.Space))
@@ -163,6 +169,11 @@ public class PlayerController : MonoBehaviour
 		if (_isJumping)
 		{
 			return EPlayerAnimations.Jump;
+		}
+
+		if (_isFalling)
+		{
+			return EPlayerAnimations.Fall;
 		} 
 		
 		if (_horizontalVelocity != 0)
