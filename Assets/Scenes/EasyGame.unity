@@ -132,12 +132,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScrollingManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6603590813137662161, guid: 23825fff0ca134d3fb7a7c1e993d320f,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000,
-        type: 0}
     - target: {fileID: 6603590813137662162, guid: 23825fff0ca134d3fb7a7c1e993d320f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,11 +186,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6603590813137662163, guid: 23825fff0ca134d3fb7a7c1e993d320f,
-        type: 3}
-      propertyPath: autoScrollingSpeed
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23825fff0ca134d3fb7a7c1e993d320f, type: 3}
@@ -393,7 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519869515}
-  floorHeightInWorldUnit: 3
+  floorHeightInWorldUnit: 4
   pixelPerUnit: 16
   platformSpawner: {fileID: 1348068916}
 --- !u!4 &1526713875
@@ -476,36 +465,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 527135937251770841, guid: dd9cb8872361a45cc97cd4b2b8fae078,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 527135937251770841, guid: dd9cb8872361a45cc97cd4b2b8fae078,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 527135937251770842, guid: dd9cb8872361a45cc97cd4b2b8fae078,
-        type: 3}
-      propertyPath: jumpForce
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 527135937251770842, guid: dd9cb8872361a45cc97cd4b2b8fae078,
-        type: 3}
-      propertyPath: longJumpMaxTimeSec
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 527135937251770842, guid: dd9cb8872361a45cc97cd4b2b8fae078,
-        type: 3}
-      propertyPath: walkingSpeed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 527135937251770843, guid: dd9cb8872361a45cc97cd4b2b8fae078,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 1.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd9cb8872361a45cc97cd4b2b8fae078, type: 3}

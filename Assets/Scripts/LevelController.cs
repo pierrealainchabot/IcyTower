@@ -7,15 +7,18 @@ using UnityEngine.Serialization;
 public class LevelController : MonoBehaviour
 {
     public Camera mainCamera;
-    public float floorHeightInWorldUnit = 5;
-    public int pixelPerUnit = 16;
+    public PlayerController player;
     public PlatformSpawner platformSpawner;
     
+    public float floorHeightInWorldUnit = 5;
+    public int pixelPerUnit = 16;
+
     private float _elapsedDistance;
 
     private void Start()
     {
         SpawnMissingPlatforms();
+        ScrollingManager.Instance.StartScrolling();
     }
 
     private void Update()

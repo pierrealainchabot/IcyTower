@@ -14,6 +14,9 @@ public abstract class Scrollable : MonoBehaviour, IScrollable
 
     private void OnDestroy()
     {
-        ScrollingManager.Instance.DeregisterScrollable(this);
+        if (!ScrollingManager.Destroyed)
+        {
+            ScrollingManager.Instance.DeregisterScrollable(this);   
+        }
     }
 }

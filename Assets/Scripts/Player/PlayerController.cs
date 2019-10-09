@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -27,7 +28,19 @@ public class PlayerController : MonoBehaviour
 		this._animator = GetComponent<Animator>();
 		this._rigidbody2D = GetComponent<Rigidbody2D>();
 	}
-	
+
+	private void OnBecameInvisible()
+	{
+		if (Camera.main != null)
+		{
+			bool bottomExit = Camera.main.WorldToScreenPoint(transform.position).y < 0;
+			if (bottomExit)
+			{
+				GameManager.Instance.EndGame();	
+			}	
+		}
+	}
+
 	void Update ()
 	{
 		UpdateMovementStatesFromInput();
@@ -40,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
 	private void UpdateMovementStatesFromInput()
 	{
-		float horizontalAxis = Input.GetAxisRaw("Horizontal");
+		float horizontalAxis = Input.GetAxis("Horizontal");
 		UpdateDirectionFromHorizontalAxis(horizontalAxis);
 		UpdateHorizontalVelocity(horizontalAxis);
 	}
@@ -52,12 +65,24 @@ public class PlayerController : MonoBehaviour
 			return; // Keep facing the same direction
 		}
 
-		_direction = horizontalAxis > 0 ? 1 : -1;
+		var currentDirection = horizontalAxis > 0 ? 1 : -1;
+		if (_direction != currentDirection)
+		{
+			_direction = currentDirection;
+			ChangeDirection();
+		}
+	}
+
+	private void ChangeDirection()
+	{
+		Vector3 directionChanger = transform.localScale;
+		directionChanger.x *= -1;
+		transform.localScale = directionChanger;
 	}
 
 	private void UpdateHorizontalVelocity(float horizontalAxis)
 	{
-		_horizontalVelocity =  walkingSpeed * horizontalAxis;
+		_horizontalVelocity = walkingSpeed * horizontalAxis;
 	}
 	
 	private void ApplyVelocity()
@@ -76,14 +101,12 @@ public class PlayerController : MonoBehaviour
 				_isJumping = true;
 				_holdingJumpButton = true;
 				_longJumpingAllowed = true;
-				Debug.Log("Long jumps allowed");
 			}
 			else
 			{
 				_isJumping = false;
 				_longJumpingAllowed = false;
 				_elapsedLongJumpTime = 0;
-				Debug.Log("Long jumps disallowed. Jump reset");
 			}
 		}
 		else if (_longJumpingAllowed && _holdingJumpButton)
@@ -96,7 +119,6 @@ public class PlayerController : MonoBehaviour
 			else
 			{
 				_longJumpingAllowed = false;
-				Debug.Log("Long jumps disallowed. Time out");
 			}
 		}
 
@@ -104,7 +126,6 @@ public class PlayerController : MonoBehaviour
 		{
 			_longJumpingAllowed = false;
 			_holdingJumpButton = false;
-			Debug.Log("Long jumps disallowed. Space released.");
 		}
 	}
 
@@ -146,7 +167,7 @@ public class PlayerController : MonoBehaviour
 		
 		if (_horizontalVelocity != 0)
 		{
-			return EPlayerAnimations.Walk;
+			return EPlayerAnimations.Run;
 		}
 		
 		return EPlayerAnimations.Idle;
@@ -154,6 +175,6 @@ public class PlayerController : MonoBehaviour
 	
 	private void ChangeAnimationState(EPlayerAnimations value) 
 	{
-		//this._animator.SetInteger("AnimationState", (int)value);
+		this._animator.SetInteger("AnimationState", (int)value);
 	}
 }

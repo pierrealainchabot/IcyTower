@@ -2,35 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class ScrollingManager : MonoBehaviour
+public class ScrollingManager : Singleton<ScrollingManager>
 {
-    public static ScrollingManager Instance { get; private set; }
-
     public float autoScrollingSpeed = 1;
     public bool automaticStart = false;
     
     private List<IScrollable> _scrollables = new List<IScrollable>();
     private bool _started = false;
-
-    void Awake()
+    
+    protected override void Awake()
     {
-        SingletonPattern();
+        base.Awake();
         _started = automaticStart;
-    }
-
-    private void SingletonPattern()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this);
-        }
     }
 
     public void StartScrolling()
