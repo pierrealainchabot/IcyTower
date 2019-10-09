@@ -338,7 +338,7 @@ MonoBehaviour:
   spawingProfile:
     fullWidthFloorAfter: 20
     minWidth: 3
-    maxWidth: 15
+    maxWidth: 10
 --- !u!114 &1348068917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,9 +382,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519869515}
+  player: {fileID: 0}
+  platformSpawner: {fileID: 1348068916}
   floorHeightInWorldUnit: 4
   pixelPerUnit: 16
-  platformSpawner: {fileID: 1348068916}
 --- !u!4 &1526713875
 Transform:
   m_ObjectHideFlags: 0
